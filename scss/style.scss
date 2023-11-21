@@ -1,0 +1,12 @@
+@use 'abstracts/basics';
+@use 'abstracts/variables';
+@use 'abstracts/general';
+
+@use 'components/header';
+@use 'components/main';
+
+@use 'components/menu';
+@use 'components/login';
+@use 'components/lessons';
+
+@use 'components/registrationForm';

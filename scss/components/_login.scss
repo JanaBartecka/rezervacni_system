@@ -1,0 +1,55 @@
+.login {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+
+    &__section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: calc(100vh - 50px);
+        margin-top: 50px;
+        z-index: 100;
+        transition: all 0.5s;
+        padding: 15px;
+
+        &--closed {
+            display: none;
+            transition: all 0.5s;
+        }
+    }
+
+    &__icon {
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    }
+
+    &__userName {
+        padding-left: 15px;
+
+        &:hover {
+            font-weight: 500;
+            transform: scale(1.1);
+            transition: 0.5s;
+            cursor: pointer;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        gap: 15px;
+        padding-top: 20px;
+    }
+
+    &__registration {
+        padding-top: 20px;
+        line-height: 2;
+    }
+}

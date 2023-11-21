@@ -1,0 +1,62 @@
+:root {
+    //--primaryColor:#fdffb6;
+    --primaryColor:#F78154;
+    //--secondaryColor:#fcf633;
+    --secondaryColor:#f5f5f5;
+    --tertiaryColor:#ff4800;
+    --buttonColor:#cec16b;
+    --textColor1:var(--primaryColor);
+    --textColor2:var(--backgroundColor1);
+    --lightColor:white;
+    // --focusColor:#B309A6;
+    --greyColor: #737373;
+    // --greyDarkColor: #889696;
+    //--backgroundColor1:#404040;
+    --backgroundColor1:#ffffff;
+    --backgroundColor2:var(--primaryColor);
+    --darkBrightness:1;
+
+}
+
+ @media (prefers-color-scheme: dark){
+     :root {
+    --primaryColor:#e6e6e6;
+    //--secondaryColor:#fcf633;
+    --secondaryColor:#00dedb;
+    --tertiaryColor:#191919;
+    --buttonColor:#E2D686;
+    --textColor1:var(--primaryColor);
+    --textColor2:var(--backgroundColor1);
+    --lightColor:white;
+    // --focusColor:#B309A6;
+    // --greyColor: #E0E2DB;
+    // --greyDarkColor: #889696;
+    //--backgroundColor1:#404040;
+    --backgroundColor1:#000000;
+    --backgroundColor2:var(--primaryColor);
+    --darkBrightness:1;
+    }
+}
+
+$spacer-normal:1rem;
+$spacer-small:0.5rem;
+$spacer-middle:1.5rem;
+$spacer-big:2rem;
+$radius:10px;
+
+$minwidth-tablet:42rem;
+$minwidth-tablet-lekce:64rem;
+$minwidth-computer:63rem;
+$minwidth-computer-menu:86rem;
+$minwidth-singleAkce:50rem;
+$maxwidth:70rem;
+
+// @mixin cardStyle {
+//     border-top-right-radius: 50px;
+//     border-bottom-left-radius: 50px;
+//     background-color: pink;
+// }
+
+
+
+

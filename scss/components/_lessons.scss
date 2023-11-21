@@ -1,0 +1,127 @@
+.lessons {
+
+    &__headline {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+        align-content: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    &__item {
+        max-width: 400px;
+        border: 1px solid var(--primaryColor);
+        border-radius: 10px;
+        padding: 10px;
+
+        &:hover {
+            background-color: var(--secondaryColor);
+        }
+
+    }
+    &__link {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+
+        & span + span {
+            padding-top: 10px;
+        }
+
+    }
+
+    &__date {
+        font-size: 2rem;
+    }
+
+    &__time {
+        font-size: 1.2rem;
+    }
+
+    &__name {
+        color: var(--primaryColor);
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__button  {
+        padding: 10px;
+        text-align: center;
+
+        &:hover {
+            filter: saturate(10);
+            transition: 0.5s;
+        }
+    }
+
+    &__edit {
+        background-color: rgb(255, 255, 134);
+
+        &:hover {
+            filter: saturate(10);
+            transition: 0.5s;
+        }
+    }
+
+    &__delete {
+        background-color: var(--primaryColor);
+        &:hover {
+            filter: saturate(10);
+            transition: 0.5s;
+        }
+    }
+
+    &__applied {
+        background-color: var(--secondaryColor);
+        &:hover {
+            filter: saturate(10);
+            transition: 0.5s;
+        }
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    &-item {
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.lessons-item {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+}
+
+.lessons-form-full {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

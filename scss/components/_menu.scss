@@ -1,0 +1,119 @@
+@use '../abstracts/variables' as v;
+
+.menu {
+    text-align: center;
+    
+    &__hamburger {
+        cursor: pointer;
+        padding: 15px;
+        width: 100%;
+
+        &--active,
+        &--opened {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        &--inactive {
+            display: none;
+        }
+
+        &--active:hover .menu__hamburger--lower{
+            width: 1px;
+            transition: all 0.5s;
+        }
+
+        &--active:hover .menu__hamburger--middle{
+            width: 10px;
+            transition: all 0.5s;
+        }
+
+        &--item {
+            width: 20px;
+            height: 2px;
+            background-color: black;
+            margin-top: 3px;
+            transition: all 0.5s;
+            flex-grow: 0;
+        }
+
+        &--opened .menu__hamburger--middle {
+            width: 0px;
+            transition: all 0.5s;
+        }
+
+        &--opened .menu__hamburger--lower {
+            width: 32px;
+            rotate: 45deg;
+            transform: translateY(-7px);
+            transition: all 0.5s;
+        }
+
+        &--opened .menu__hamburger--upper {
+            width: 32px;
+            rotate: -45deg;
+            transform: translateY(7px);
+            transition: all 0.5s;
+        }
+
+        // &--opened:hover .menu__hamburger--upper {
+        //     transform: ;
+        //     transition: all 0.5s;
+        // }
+        
+    }
+    &__list {
+        flex-wrap: nowrap;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: calc(100vh - 50px);
+        text-align: center;
+        margin-top: 50px;
+        background-color: var(--secondaryColor);
+        z-index: 100;
+        flex-direction: column;
+        //justify-content: center;
+        align-items: center;
+
+        &--closed {
+            display: none;
+        }
+    
+        &--opened {
+            display: flex;
+        }
+    }
+
+    &__item {
+        list-style: none;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 100%;
+        cursor: pointer;
+        padding: 10px;
+
+        &:hover {
+            background-color: var(--primaryColor);
+        }
+
+    }
+
+    &__link {
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 600;
+        color: black;
+
+        &:hover {
+            color: black;
+            transition: all 0.5s;
+        }
+
+    }
+}
