@@ -11,7 +11,7 @@
         $role = $_SESSION["role"];
     }
 
-    $lessonsPerPage = 5;
+    $lessonsPerPage = 12;
 
     if (isset($_GET['page'])) {
         $currentPage = $_GET['page'];

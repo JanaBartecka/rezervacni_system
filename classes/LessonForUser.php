@@ -37,7 +37,7 @@ class LessonForUser {
                 throw new Exception("Získání prihlaseni uzivatele na lekci selhalo");
             }
         } catch (Exception $e) {
-            error_log("Chyba u funkce checkUserApplied\n", 3, "/rezervacni_system/errors/error.log");
+            error_log("Chyba u funkce checkUserApplied\n", 3, "/errors/error.log");
             echo "Typ chyby: " . $e->getMessage();
         }  
     }
@@ -177,36 +177,26 @@ class LessonForUser {
         }
      }
 
-     public static function getMailListOfAppliedUsers($connection,$id_lekce){
+     public static function getMailListOfAppliedUsers($connection, $id_lekce){
 
         require '../assets/globalVariables.php';
 
-        $sql = "SELECT id_user
-                    FROM prihlaseni
-                    WHERE id_lekce = :id_lekce ";
-
-// SELECT email, first_name, second_name 
-// FROM user
-// WHERE id_user IN (
+        $sql = "SELECT email, first_name, second_name
+                    FROM user
+                    WHERE id_user IN (
+                        SELECT id_user
+                        FROM prihlaseni
+                        WHERE id_lekce=:id_lekce)";
 
         $stmt = $connection -> prepare($sql);
-        echo var_dump($stmt);
-        echo '<br>';
+
         $stmt -> bindValue(":id_lekce", $id_lekce, PDO::PARAM_INT);
-        //$stmt -> bindValue(":id_user", $id_user, PDO::PARAM_INT);
-        echo var_dump($stmt);
-        echo '<br>';
-        echo $id_lekce;
-        echo '<br>';
 
         try {
             if ($stmt -> execute()) {
                 $result = $stmt->fetchAll();
-                echo var_dump($result);
-                echo '<br>';
+
                 if ($result) {
-                    echo var_dump($result);
-                    echo '<br>';
                     return $result;
                 } else {
                     return false;
@@ -215,7 +205,7 @@ class LessonForUser {
             throw new Exception("nelze ziskat mailist uzivatelu prihlasenych na lekci");
             }
         } catch(Exception $e) {
-        error_log("chyba u funkce getMailListOfAppliedUsers", 3, $pathUrl . "/errors/error.log\n");
+        error_log("chyba u funkce getMailListOfAppliedUsers", 3, "$pathUrl/errors/error.log\n");
         echo "typ chyby:" . $e->getMessage();
         } 
 

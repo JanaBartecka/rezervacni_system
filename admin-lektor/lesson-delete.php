@@ -30,21 +30,15 @@
     $lekce = Lesson::getLesson($connection, $_GET["id_lekce"], $columns);
 
     if($_SERVER["REQUEST_METHOD"] === "POST" AND $role === 'admin') {
-        
+        // maillist of recepients
+        $mailList = LessonForUser::getMailListOfAppliedUsers($connection, intval($_GET["id_lekce"]));
+
         if(Lesson::deleteLesson($connection, $_GET["id_lekce"])) {
+            
             if (isset($_POST['deleteReservation'])) {
-                echo $_GET["id_lekce"];
-                echo '<br>';
-                $mailList = LessonForUser::getMailListOfAppliedUsers($connection, $_GET["id_lekce"]);
-                //$mailList = LessonForUser::getMailListOfAppliedUsers($connection, 1);
+                
                 $message = $_POST['messageLessonDeleted'];
                 $subject = $lekce['name_lekce'] . 'v' . $lekce['day'] . 'zrusen';
-
-                echo var_dump($mailList);
-                echo '<br>';
-                echo $message;
-                echo '<br>';
-                echo $subject;
                 
                 if($mailList) {
                     Mail::sendMail($mailList, $subject, $message);
@@ -53,7 +47,7 @@
                 }
             }
 
-            //Url::redirectUrl($pathUrl . "/index.php");
+            Url::redirectUrl($pathUrl . "/index.php");
         }
     }
 

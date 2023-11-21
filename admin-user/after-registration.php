@@ -3,6 +3,7 @@
     require "../classes/User.php";
     require "../classes/Database.php";
     require "../classes/Url.php";
+    require "../assets/globalVariables.php";
 
     session_start();
 
@@ -34,12 +35,12 @@
                 // set the role of the user
                 $_SESSION["role"] = User::getUserPropertiesByID($connection, $id_user, 'user_type')['user_type'];
     
-                Url::redirectUrl("/rezervacni_system/admin-user/user-details.php?success=1");
+                Url::redirectUrl("$pathUrl/admin-user/user-details.php?success=1");
             } else {
                 echo "uzivatele se nepodarilo pridat";
             }
         } else {
-            Url::redirectUrl("/rezervacni_system/admin-user/user-details.php?success=0");
+            Url::redirectUrl("$pathUrl/admin-user/user-details.php?success=0");
         }
 
 

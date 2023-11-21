@@ -28,7 +28,7 @@
     
     <main class='main'>
         <h1 class='main__headline'>Rezervační systém MC Žirafa</h1>
-<p>test</p>
+
         <?php require "./assets/lessons-list.php"; ?>
 
     </main>

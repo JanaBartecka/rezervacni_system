@@ -79,7 +79,7 @@
             // change value free_to_apply in table 'lekce'
             Lesson::UpdateFreeToApply($connection, $max_to_apply-$sumApplication, $_GET['id_lekce']);
 
-            Url::redirectUrl("/rezervacni_system/lesson-item.php?id_lekce=$id_lekce");
+            Url::redirectUrl("$pathUrl/lesson-item.php?id_lekce=$id_lekce");
         }
     }
 

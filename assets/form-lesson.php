@@ -9,7 +9,7 @@
         <label for="chbox_repeat_1week">Opakování každý týden
             <input type="checkbox" name="chbox_repeat_1week">
         </label>
-        <label type='text' for="endDay">Opakování do:
+        <label type='text' for="endDay">Opakování do (nepovinné):
             <input type="date" name="endDay">
         </label>
     <?php endif ?>
@@ -46,6 +46,6 @@
     <?php else : ?>
         <input type="submit" name="createLesson" value="Přidat lekci">
     <?php endif ?>
-    <a class='button-link' href="/rezervacni_system/index.php">Zpět na seznam lekcí</a>
+    <a class='button-link' href="<?= $pathUrl ?>/index.php">Zpět na seznam lekcí</a>
     
 </form>
