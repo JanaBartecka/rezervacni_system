@@ -220,6 +220,11 @@ header {
   position: relative;
   background-color: var(--secondaryColor);
 }
+@media screen and (min-width: 70rem) {
+  header {
+    display: block;
+  }
+}
 
 .main {
   transition: all 0.5s;
@@ -283,6 +288,11 @@ header {
   transform: translateY(7px);
   transition: all 0.5s;
 }
+@media screen and (min-width: 70rem) {
+  .menu__hamburger {
+    display: none;
+  }
+}
 .menu__list {
   flex-wrap: nowrap;
   position: absolute;
@@ -303,6 +313,17 @@ header {
 .menu__list--opened {
   display: flex;
 }
+@media screen and (min-width: 70rem) {
+  .menu__list {
+    display: block;
+    position: relative;
+    z-index: 1;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+  }
+}
 .menu__item {
   list-style: none;
   margin-top: 5px;
@@ -313,6 +334,12 @@ header {
 }
 .menu__item:hover {
   background-color: var(--primaryColor);
+}
+@media screen and (min-width: 70rem) {
+  .menu__item {
+    display: inline-block;
+    width: auto;
+  }
 }
 .menu__link {
   text-transform: uppercase;
@@ -327,11 +354,21 @@ header {
   color: black;
   transition: all 0.5s;
 }
+@media screen and (min-width: 70rem) {
+  .menu {
+    display: block;
+  }
+}
 
 .login {
   padding: 15px;
   display: flex;
   flex-direction: row;
+}
+@media screen and (min-width: 70rem) {
+  .login {
+    display: block;
+  }
 }
 .login__section {
   position: absolute;
@@ -375,23 +412,39 @@ header {
   padding-top: 20px;
   line-height: 2;
 }
+.login_userDetails {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  margin-top: 50px;
+  z-index: 100;
+  transition: all 0.5s;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.login_userDetails--closed {
+  display: none;
+  transition: all 0.5s;
+}
 
 .lessons__headline {
   text-align: center;
   margin-bottom: 10px;
 }
 .lessons__list {
-  display: flex;
-  flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
-  align-content: start;
-  justify-content: space-around;
+  display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
 }
 .lessons__item {
-  max-width: 400px;
   border: 1px solid var(--primaryColor);
   border-radius: 10px;
   padding: 10px;

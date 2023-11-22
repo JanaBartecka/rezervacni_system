@@ -23,23 +23,37 @@ hamburger.addEventListener('click' , () => {
 const loginIcon = document.querySelector('.login__icon')
 const loginSection = document.querySelector('.login__section')
 
-loginIcon.addEventListener('click', () => {
-    if(loginIcon.classList.contains('login__icon--closed')) {
-        loginIcon.classList.remove('login__icon--closed')
-        loginIcon.classList.add('login__icon--opened')
-        loginSection.classList.toggle('login__section--closed')
-        document.querySelector('main').style.display = 'none'
-    } else if(loginIcon.classList.contains('login__icon--opened')) {
-        loginIcon.classList.remove('login__icon--opened')
-        loginIcon.classList.add('login__icon--closed')
-        loginSection.classList.toggle('login__section--closed')
-        document.querySelector('main').style.display = 'block'
-    }
-})
+if (loginSection != null){
+    loginIcon.addEventListener('click', () => {
+        if(loginIcon.classList.contains('login__icon--closed')) {
+            loginIcon.classList.remove('login__icon--closed')
+            loginIcon.classList.add('login__icon--opened')
+            loginSection.classList.toggle('login__section--closed')
+            document.querySelector('main').style.display = 'none'
+        } else if(loginIcon.classList.contains('login__icon--opened')) {
+            loginIcon.classList.remove('login__icon--opened')
+            loginIcon.classList.add('login__icon--closed')
+            loginSection.classList.toggle('login__section--closed')
+            document.querySelector('main').style.display = 'block'
+        }
+    })
+}
+
 
 // log-in icon - open users details
 const loginName = document.querySelector('.login_userName')
+const login =document.querySelector('.login')
+const userDetails = document.querySelector('.login_userDetails')
 
-loginName.addEventListener('click', ()=> {
-    
-})
+if (loginSection == null){
+    login.addEventListener('click', ()=> {
+        if(userDetails.classList.contains('login_userDetails--closed')) {
+            userDetails.classList.toggle('login_userDetails--closed')
+            document.querySelector('main').style.display = 'none'
+        } else {
+            userDetails.classList.toggle('login_userDetails--closed')
+            document.querySelector('main').style.display = 'block'
+        }
+        
+    })
+}

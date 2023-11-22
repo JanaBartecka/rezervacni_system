@@ -1,7 +1,13 @@
+@use '../abstracts/variables' as v;
+
 .login {
     padding: 15px;
     display: flex;
     flex-direction: row;
+
+    @media screen and (min-width:v.$minwidth-computer-menu) {
+        display: block;
+    }
 
     &__section {
         position: absolute;
@@ -51,5 +57,26 @@
     &__registration {
         padding-top: 20px;
         line-height: 2;
+    }
+
+    &_userDetails {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: calc(100vh - 50px);
+        margin-top: 50px;
+        z-index: 100;
+        transition: all 0.5s;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        &--closed {
+            display: none;
+            transition: all 0.5s;
+        }
+
     }
 }

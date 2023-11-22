@@ -6,4 +6,8 @@ header {
     justify-content: flex-end;
     position: relative;
     background-color: var(--secondaryColor);
+
+    @media screen and (min-width:v.$minwidth-computer-menu) {
+        display: block;
+    }
 }

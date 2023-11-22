@@ -1,7 +1,7 @@
 <?php
     
     if (Auth::isLoggedIn()) {
-        $columns = 'first_name, second_name';
+        $columns = 'first_name, second_name, email, phone_number';
         $userName = User::getUserPropertiesByID($connection, $id_user, $columns);
     }
 ?>
@@ -23,8 +23,11 @@
     <?php else: ?>
         <p class='login__userName'><?= $userName['first_name'] ?> <?= $userName['second_name'] ?></p>
 
-        <div class='login_userDetails'>
-
+        <div class='login_userDetails login_userDetails--closed'>
+            <p>Jméno:<?= $userName['first_name']?></p>
+            <p>Přijmení:<?= $userName['second_name']?></p>
+            <p>E-mail:<?= $userName['email']?></p>
+            <p>Telefonní číslo:<?= $userName['phone_number']?></p>
         </div>
     <?php endif; ?>
     </section>

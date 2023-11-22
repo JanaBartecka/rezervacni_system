@@ -57,12 +57,12 @@
             transition: all 0.5s;
         }
 
-        // &--opened:hover .menu__hamburger--upper {
-        //     transform: ;
-        //     transition: all 0.5s;
-        // }
+        @media screen and (min-width:v.$minwidth-computer-menu) {
+            display: none;
+        }
         
     }
+
     &__list {
         flex-wrap: nowrap;
         position: absolute;
@@ -75,7 +75,6 @@
         background-color: var(--secondaryColor);
         z-index: 100;
         flex-direction: column;
-        //justify-content: center;
         align-items: center;
 
         &--closed {
@@ -84,6 +83,16 @@
     
         &--opened {
             display: flex;
+        }
+
+        @media screen and (min-width:v.$minwidth-computer-menu) {
+            display: block;
+            position: relative;
+            z-index: 1;
+            flex-direction: row;
+            width: auto;
+            height: auto;
+            margin-top: 0;
         }
     }
 
@@ -97,6 +106,11 @@
 
         &:hover {
             background-color: var(--primaryColor);
+        }
+
+        @media screen and (min-width:v.$minwidth-computer-menu) {
+            display: inline-block;
+            width: auto;
         }
 
     }
@@ -115,5 +129,9 @@
             transition: all 0.5s;
         }
 
+    }
+
+    @media screen and (min-width:v.$minwidth-computer-menu) {
+        display: block;
     }
 }
