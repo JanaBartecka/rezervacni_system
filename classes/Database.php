@@ -9,23 +9,17 @@ class Database {
 
 
     public function connectionDB() {
-        $db_host="127.0.0.1";
-        $db_user="mcZirafaAdmin";
+        // $db_host="127.0.0.1";
+        // $db_user="mcZirafaAdmin";
+        // $db_password="McZirafa2023+";
+        // $db_name="zirafa";
+
+        $db_host="db.dw128.webglobe.com";
+        $db_user="janabartecka_cz1";
         $db_password="McZirafa2023+";
-        $db_name="zirafa";
+        $db_name="janabartecka_cz1";
 
-        //$connection = mysqli_connect($db_host,$db_user,$db_password,$db_name);
         $connection = "mysql:host=" . $db_host . ";dbname=" . $db_name . ";charset=utf8";
-
-        /**
-         * returns connection error - string value
-         */
-        // if (mysqli_connect_error()) {
-        //     echo mysqli_connect_error();
-        //     exit;
-        // }
-
-        // return $connection;
 
         try {
             $db = new PDO($connection, $db_user, $db_password);
