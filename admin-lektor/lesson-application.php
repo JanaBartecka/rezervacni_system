@@ -35,27 +35,32 @@
         <?php if($appliedUsers): ?>
             <ul class='list'>
                 <?php foreach($appliedUsers as $oneUser): ?>
-                    <li class='list__item'>
+                    <li class='list__item list__applications'>
                         <span><?= htmlspecialchars($oneUser['first_name']) ?></span>
                         <span><?= htmlspecialchars($oneUser['second_name']) ?></span>
                         <span><?= htmlspecialchars($oneUser['phone_number']) ?></span>
                         <span><?= htmlspecialchars($oneUser['email']) ?></span>
                         <span><?= htmlspecialchars($oneUser['number_of_applications']) ?> přihlášení</span>                        
+                    <div class="list__buttons">
+                        <a class='button-link lessons__delete' href="<?= $pathUrl ?>/admin-lektor/delete-application.php?id_lekce=<?= $_GET['id_lekce'] ?>&id_user=<?= $oneUser['id_user']?>"> Smazat přihlášeného</a>
+                    </div>
                     </li>
                     <!-- delete applied user -->
-                    <a class='button-link lessons__delete' href="<?= $pathUrl ?>/admin-lektor/delete-application.php?id_lekce=<?= $_GET['id_lekce'] ?>&id_user=<?= $oneUser['id_user']?>"> Smazat přihlášeného</a>
                 <?php endforeach ?>
             </ul>
         <?php else: ?>
             <p class='error-line'>Nebyli nalezeni žádní přihlášení na lekci.</p>
         <?php endif ?>
-        <!-- add user to apply -->
-        <?php if($free_to_apply >= 0): ?>
-            <a class='button-link' href="<?= $pathUrl ?>/admin-lektor/users-all.php?userToApply=1&id_lekce=<?= $_GET['id_lekce']?>" > Přiřadit registrovaného uživatele</a>
-        <?php else: ?>
-            <p class='error-line'>Kapacita naplněna</p>
-        <?php endif ?>
-        <a class='button-link' href=" <?= $pathUrl ?>/index.php">Zpět na seznam lekcí</a>
+
+        <div class="list__bottons--single">
+            <!-- add user to apply -->
+            <?php if($free_to_apply >= 0): ?>
+                <a class='button-link' href="<?= $pathUrl ?>/admin-lektor/users-all.php?userToApply=1&id_lekce=<?= $_GET['id_lekce']?>" > Přiřadit registrovaného uživatele</a>
+            <?php else: ?>
+                <p class='error-line'>Kapacita naplněna</p>
+            <?php endif ?>
+            <a class='button-link' href=" <?= $pathUrl ?>/index.php">Zpět na seznam lekcí</a>
+        </div>
 
     </main>
 

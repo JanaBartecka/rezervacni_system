@@ -106,11 +106,13 @@
 
         &:hover {
             background-color: var(--primaryColor);
+            transition: all 0.5s;
         }
 
         @media screen and (min-width:v.$minwidth-computer-menu) {
             display: inline-block;
             width: auto;
+            padding: 10px 20px;
         }
 
     }

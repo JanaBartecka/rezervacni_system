@@ -158,7 +158,7 @@ class LessonForUser {
      public static function deleteApplication($connection, $id_lekce, $id_user) {
         $sql = "DELETE
                 FROM prihlaseni
-                WHERE id_lekce = :id_lekce AND id_lekce = :id_lekce";
+                WHERE id_lekce = :id_lekce AND id_user = :id_user";
 
         $stmt = $connection -> prepare($sql);
 

@@ -176,7 +176,7 @@ label {
   padding: 10px;
 }
 .list li:hover {
-  filter: invert(90%);
+  filter: invert(20%);
 }
 .list li:nth-child(even) {
   background-color: var(--primaryColor);
@@ -188,6 +188,7 @@ label {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
+  align-items: center;
 }
 @media screen and (min-width: 400px) {
   .list__item {
@@ -334,11 +335,13 @@ header {
 }
 .menu__item:hover {
   background-color: var(--primaryColor);
+  transition: all 0.5s;
 }
 @media screen and (min-width: 70rem) {
   .menu__item {
     display: inline-block;
     width: auto;
+    padding: 10px 20px;
   }
 }
 .menu__link {
@@ -367,7 +370,7 @@ header {
 }
 @media screen and (min-width: 70rem) {
   .login {
-    display: block;
+    justify-content: flex-end;
   }
 }
 .login__section {
@@ -375,11 +378,14 @@ header {
   left: 0;
   top: 0;
   width: 100vw;
-  height: calc(100vh - 50px);
-  margin-top: 50px;
+  height: calc(100vh - 110px);
+  margin-top: 110px;
   z-index: 100;
   transition: all 0.5s;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .login__section--closed {
   display: none;
@@ -417,8 +423,8 @@ header {
   left: 0;
   top: 0;
   width: 100vw;
-  height: calc(100vh - 50px);
-  margin-top: 50px;
+  height: calc(100vh - 110px);
+  margin-top: 110px;
   z-index: 100;
   transition: all 0.5s;
   padding: 15px;

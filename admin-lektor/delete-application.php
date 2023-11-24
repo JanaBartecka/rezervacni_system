@@ -50,14 +50,10 @@
 
     }
 
-    $mailList = User::getUserPropertiesByID($connection, $id_user, 'email')['email'];
+    $mailList = array(User::getUserPropertiesByID($connection, $id_user, 'email, first_name, second_name'));
     $subject = 'Zrušení lekce ' . $lekce['name_lekce'] . ' konané dne ' . Date::DateFromDBdate($lekce['day']) . ' od ' . Date::DateFromDBtimeStart($lekce['time_start']) . '.';
     $message = 'Vaše přihlášení na lekci ' . $lekce['name_lekce'] . ' konanou dne ' . Date::DateFromDBdate($lekce['day']) . ' od ' . Date::DateFromDBtimeStart($lekce['time_start']) . ' bylo zrušeno administrátorem.';
-    echo $mailList;
-    echo '<br>';
-    echo $subject;
-    echo '<br>';
-    echo $message;
+    
     Mail::sendMail($mailList, $subject, $message);
 
     Url::redirectUrl($pathUrl . '/admin-lektor/lesson-application.php?id_lekce=' . $id_lekce);

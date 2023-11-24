@@ -53,6 +53,7 @@
         $sumApplication=LessonForUser::getSumApplication($connection,$_GET['id_lekce']);
         // change value free_to_apply in table 'lekce'
         Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
+        $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['createReservation'])) {
@@ -75,6 +76,7 @@
                     $sumApplication=LessonForUser::getSumApplication($connection,$_GET['id_lekce']);
                     // change value free_to_apply in table 'lekce'
                     Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
+                    $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
                     } else {
                         throw new Exception("nelze vytvorit dalsi rezervaci na lekci");
                     } 
@@ -100,6 +102,7 @@
             $sumApplication=LessonForUser::getSumApplication($connection,$_GET['id_lekce']);
             // change value free_to_apply in table 'lekce'
             Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
+            $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
             } else {
                 throw new Exception("nelze vytvorit dalsi rezervaci na lekci");
             } 
