@@ -50,6 +50,7 @@ input {
   transition: 0.5s;
   margin-top: 15px;
   outline: none;
+  padding-left: 10px;
 
   &:hover {
       background-color: var(--secondaryColor);

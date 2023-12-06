@@ -4,6 +4,7 @@
     require "../classes/Database.php";
     require "../classes/Url.php";
     require "../assets/globalVariables.php";
+    require "../classes/Mail.php";
 
     session_start();
 
@@ -34,8 +35,19 @@
                 $_SESSION["user_id"] = $id_user;
                 // set the role of the user
                 $_SESSION["role"] = User::getUserPropertiesByID($connection, $id_user, 'user_type')['user_type'];
+
+                // send mail to registered user
+                $mailList = array(array('email' => $email,
+                                 'first_name' => $first_name,
+                                 'second_name' => $second_name));
+                $subject = 'Registrace do systému MC Žirafa';
+                $message = 'Uživatel ' . $first_name . ' ' . $second_name . ' byl registrován do rezervačního systému MC Žirafa. K přihlášení použijte e-mail ' . $email . ' a vámi zadané heslo.';
+                
+                Mail::sendMail($mailList, $subject, $message, false);
     
                 Url::redirectUrl("$pathUrl/admin-user/user-details.php?success=1");
+
+
             } else {
                 echo "uzivatele se nepodarilo pridat";
             }

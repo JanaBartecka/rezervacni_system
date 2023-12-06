@@ -9,15 +9,15 @@ class Database {
 
 
     public function connectionDB() {
-        // $db_host="127.0.0.1";
-        // $db_user="mcZirafaAdmin";
-        // $db_password="McZirafa2023+";
-        // $db_name="zirafa";
-
-        $db_host="db.dw128.webglobe.com";
-        $db_user="janabartecka_cz1";
+        $db_host="127.0.0.1";
+        $db_user="mcZirafaAdmin";
         $db_password="McZirafa2023+";
-        $db_name="janabartecka_cz1";
+        $db_name="zirafa";
+
+        // $db_host="db.dw128.webglobe.com";
+        // $db_user="janabartecka_cz1";
+        // $db_password="McZirafa2023+";
+        // $db_name="janabartecka_cz1";
 
         $connection = "mysql:host=" . $db_host . ";dbname=" . $db_name . ";charset=utf8";
 

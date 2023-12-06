@@ -18,7 +18,7 @@ Class Mail {
      * @return void
      */
 
-     public static function sendMail($mailList, $subject, $body) {
+     public static function sendMail($mailList, $subject, $body, $addAddress = true) {
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
         try {
@@ -35,7 +35,7 @@ Class Mail {
             $mail->Encoding   = 'base64';
             //Recipients
             $mail->setFrom('info@mc-zirafa.cz', 'MC Zirafa - rezervacni system');
-            $mail->addAddress('info@mc-zirafa.cz', 'MC Zirafa - rezervacni system');
+            $addAddress && $mail->addAddress('info@mc-zirafa.cz', 'MC Zirafa - rezervacni system');
             foreach($mailList as $recepient) {
                 $mail->addBCC($recepient['email'], $recepient['first_name'] . ' ' . $recepient['second_name']);     //Add a recipient
                 echo $recepient['email'];

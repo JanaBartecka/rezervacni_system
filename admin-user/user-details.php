@@ -33,12 +33,11 @@
     <main class='main'>
         <?php if (isset($_GET['success'])): ?>
             <?php if ($_GET['success'] == 1) : ?>
-                <p>Byl/a jste úspěšně zarigistrován/a.</p>
+                <p class='error-line'>Byl/a jste úspěšně zarigistrován/a.</p>
             <?php else :  ?>
-                <p>Nebyl/a jste zaregistrována, váš e-mail již v naší databázi je zaregistrován. </p>
+                <p class='error-line'>Nebyl/a jste zaregistrována, váš e-mail již v naší databázi je zaregistrován. </p>
             <?php endif ?>
         <?php endif ?>
-        <p>detaily uzivatele</p>
     </main>
 
     <footer>
