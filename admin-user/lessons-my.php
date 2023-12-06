@@ -3,6 +3,7 @@
     require "../classes/Database.php";
     require "../classes/Lesson.php";
     require "../classes/User.php";
+    require "../classes/Date.php";
     require '../assets/globalVariables.php';
 
     session_start();
@@ -41,7 +42,7 @@
                 <?php foreach($lessonsList as $oneLesson): ?>
                     <li class='list__item'>
                         <span><?= htmlspecialchars($oneLesson['name_lekce']) ?></span>
-                        <span><?= $oneLesson['time_start'] ?></span>
+                        <span><?= Date::DateFromDBdate($oneLesson['day']) ?> <?= Date::DateFromDBtimeStart($oneLesson['time_start']) ?></span>
                         <span><?= htmlspecialchars($oneLesson['number_of_applications']) ?> přihlášení</span>
                         <div class="list__buttons">
                             <a class='button-link list__button' href="<?= $pathUrl ?>/lesson-item.php?id_lekce=<?= $oneLesson['id_lekce'] ?>"> Více informací</a>

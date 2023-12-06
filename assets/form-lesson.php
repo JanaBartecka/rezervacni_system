@@ -40,7 +40,7 @@
     
 
     <?php if($editLekce) : ?>
-        <textarea name="message">testuju novy rezervacni system Janca </textarea>
+        <textarea name="message" placeholder='Zde napište text mailu, který přijde již přihlášeným. Pokud mail odeslat nechcete, stačí kliknout na tlačítko Změnit lekci, mail se pak neodešle.'></textarea>
         <input type="submit" name="editLesson" value="Změnit lekci">
         <input type="submit" name="editLessonWithEmail" value="Změnit lekci a poslat mail">
     <?php else : ?>

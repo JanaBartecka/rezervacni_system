@@ -383,7 +383,7 @@ class Lesson {
      * @param object $connection - connection to database
      * @param string $id_user - id of user
      * 
-     * @return array accociative array with data about each lesson - name of the lesson, day, time start and time end
+     * @return array accociative array with data about each user - first_name, second_name, phone_number, email, id_user, number_of_applications
      */
     public static function getUsersByLesson ( $connection,$id_lekce ) {
 
