@@ -7,6 +7,7 @@
     require "./classes/User.php";
     require "./classes/Date.php";
     require "./classes/Mail.php";
+    require "./classes/Url.php";
     require './assets/globalVariables.php';
 
     $database = new Database();
@@ -46,19 +47,9 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['deleteReservation'])) {
-        if($number_of_applications === 1) {
-            LessonForUser::deleteApplication($connection,$_GET['id_lekce'],$id_user);
-        } else {
-            LessonForUser::changeApplicationToLesson($connection,$id_user,$_GET['id_lekce'],--$number_of_applications);
-        }
 
-        // reassign value number_of_applications
-        $number_of_applications=LessonForUser::checkUserApplied($connection,$id_user,$_GET['id_lekce']);
-        // find all apllications to specific lesson from all users
-        $sumApplication=LessonForUser::getSumApplication($connection,$_GET['id_lekce']);
-        // change value free_to_apply in table 'lekce'
-        Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
-        $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
+        Url::redirectUrl($pathUrl . "/admin-user/reservation-delete.php?id_lekce=" . $_GET['id_lekce']);
+    
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['createReservation'])) {
@@ -173,7 +164,9 @@
                         <!-- delete reservation to lesson -->
                         <?php if (Date::DateFromDBlessonStart($lekce['day'], $lekce['time_start']) > Date:: DateFromDBapplyTo($lekce['day'], $lekce['time_start'], $lekce['time_apply_to'])) : ?>
                             <form method="POST">
+                                <div>
                                 <input type="submit" name="deleteReservation" value="Zrušit přihlášení">
+                                </div>
                             </form>
                         <?php endif; ?>
                     <?php endif; ?>

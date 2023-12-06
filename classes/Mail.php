@@ -3,9 +3,11 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require './vendor/PHPMailer/src/Exception.php';
-require './vendor/PHPMailer/src/PHPMailer.php';
-require './vendor/PHPMailer/src/SMTP.php';
+$docRoot = realpath(__DIR__.'/..');
+
+require "$docRoot/vendor/PHPMailer/src/Exception.php";
+require "$docRoot/vendor/PHPMailer/src/PHPMailer.php";
+require "$docRoot/vendor/PHPMailer/src/SMTP.php";
 
 Class Mail {
     /**
@@ -38,9 +40,6 @@ Class Mail {
             $addAddress && $mail->addAddress('info@mc-zirafa.cz', 'MC Zirafa - rezervacni system');
             foreach($mailList as $recepient) {
                 $mail->addBCC($recepient['email'], $recepient['first_name'] . ' ' . $recepient['second_name']);     //Add a recipient
-                echo $recepient['email'];
-                echo $recepient['first_name'];
-                echo $recepient['second_name'];
             };
             $mail->addReplyTo('info@mc-zirafa.cz', 'MC Zirafa');
             // $mail->addCC('cc@example.com');
