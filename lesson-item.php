@@ -6,14 +6,19 @@
     require "./classes/Auth.php";
     require "./classes/User.php";
     require "./classes/Date.php";
+    require "./classes/Mail.php";
     require './assets/globalVariables.php';
 
     $database = new Database();
     $connection = $database -> connectionDB();
 
     $role ='';
+    //variable used to show a notification that user is not logged in to make a reservation
     $userMustLogIn=false;
+    //variable used to show a notification that user is already applied to the lesson
     $userIsApplied=false;
+    //variable used to show a notification that reservation was successful
+    $reservationSuccess = false;
 
     session_start();
 
@@ -77,6 +82,18 @@
                     // change value free_to_apply in table 'lekce'
                     Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
                     $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
+                    
+                    // set variable used to show a notification
+                    $reservationSuccess = true;
+
+                    // send mail to user that the reservation was successful
+                    $columns = 'email,first_name, second_name';
+                    $mailList = Array(User::getUserPropertiesByID($connection, $id_user, $columns));
+                    $subject = 'Přihlášení proběhlo úspěšně.';
+                    $message = 'Přihlášení na lekci ' . $lekce['name_lekce'] . ' konanou dne ' . Date::DateFromDBdate($lekce['day']) . ' od ' . Date::DateFromDBtimeStart($lekce['time_start']) . ' proběhlo úspěšně.';
+
+                    Mail::sendMail($mailList, $subject, $message, false);
+
                     } else {
                         throw new Exception("nelze vytvorit dalsi rezervaci na lekci");
                     } 
@@ -103,6 +120,18 @@
             // change value free_to_apply in table 'lekce'
             Lesson::UpdateFreeToApply($connection, $lekce['max_to_apply']-$sumApplication, $_GET['id_lekce']);
             $lekce = Lesson::getLesson($connection, $_GET['id_lekce']);
+
+            // set variable used to show a notification
+            $reservationSuccess = true;
+
+            // send mail to user that the reservation was successful
+            $columns = 'email,first_name, second_name';
+            $mailList = Array(User::getUserPropertiesByID($connection, $id_user, $columns));
+            $subject = 'Přihlášení proběhlo úspěšně.';
+            $message = 'Přihlášení na lekci ' . $lekce['name_lekce'] . ' konanou dne ' . Date::DateFromDBdate($lekce['day']) . ' od ' . Date::DateFromDBtimeStart($lekce['time_start']) . ' proběhlo úspěšně.';
+
+            Mail::sendMail($mailList, $subject, $message, false);
+
             } else {
                 throw new Exception("nelze vytvorit dalsi rezervaci na lekci");
             } 
@@ -174,6 +203,10 @@
                     <?php endif; ?>
                 <?php else: ?>
                     <p class='error-line'>Vypršel časový limit pro přihlášení/odhlášení</p>
+                <?php endif ?>
+
+                <?php if($reservationSuccess): ?>
+                    <p class='error-line error-line--green'>Vaše registrace proběhla úspěšně.</p>
                 <?php endif ?>
                         
                 <!-- admin buttons to delete and edit lesson -->

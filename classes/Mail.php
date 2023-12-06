@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/PHPMailer/src/Exception.php';
-require '../vendor/PHPMailer/src/PHPMailer.php';
-require '../vendor/PHPMailer/src/SMTP.php';
+require './vendor/PHPMailer/src/Exception.php';
+require './vendor/PHPMailer/src/PHPMailer.php';
+require './vendor/PHPMailer/src/SMTP.php';
 
 Class Mail {
     /**

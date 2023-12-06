@@ -171,6 +171,9 @@ label {
   padding: 20px 15px;
   text-align: center;
 }
+.error-line--green {
+  color: green;
+}
 
 .list li {
   margin-top: 5px;
