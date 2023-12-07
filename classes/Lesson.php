@@ -277,10 +277,10 @@ class Lesson {
     public static function getFutureLessonsPerPage($connection, $lessonsPerPage, $offset) {
         $sql="SELECT * 
                 FROM lekce
-                WHERE day >= CURRENT_DATE()
+                WHERE day >= CURRENT_DATE() AND name_lekce='opakk'
                 ORDER BY day ASC
                 LIMIT :lessonsPerPage
-                OFFSET :offset";
+                OFFSET :offset"; 
 
         $stmt = $connection -> prepare($sql);
 
@@ -313,12 +313,46 @@ class Lesson {
         $sql="WITH pastLessons AS (
                 SELECT * 
                 FROM lekce
-                WHERE day < CURRENT_DATE()
+                WHERE day < CURRENT_DATE() AND name_lekce='opakk'
                 ORDER BY day DESC
                 LIMIT :lessonsPerPage
                 OFFSET :offset)
               SELECT * FROM pastLessons
               ORDER BY day ASC";
+
+        $stmt = $connection -> prepare($sql);
+
+        $stmt -> bindValue(":lessonsPerPage", $lessonsPerPage, PDO::PARAM_INT);
+        $stmt -> bindValue(":offset", $offset, PDO::PARAM_INT);
+
+        try {
+            if ($stmt -> execute()) {
+                return $stmt -> fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                throw new Exception("chyba pri ziskani vsech lekci");
+            }
+        } catch(Exception $e) {
+            error_log("chyba u funkce getAllLessons", 3, "./errors/error.log");
+            echo "typ chyby:" . $e->getMessage();
+        }
+    }
+
+    /**
+     * return future lessons from database limited by number lessonsPerPage and with specified offset
+     * 
+     * @param object $connection - connection to database
+     * @param integer $lessonsPerPage - number of lessons per page
+     * @param integer $offset - offset of the lessons from CURRENT_DATE
+     * 
+     * @return array $lekce - array of objects where one object is one lesson
+     * 
+     */
+    public static function getLessonsFiltered($connection, $lessonsPerPage, $offset) {
+        $sql="SELECT DISTINCT name_lekce
+                FROM lekce
+                ORDER BY day ASC
+                LIMIT :lessonsPerPage
+                OFFSET :offset";
 
         $stmt = $connection -> prepare($sql);
 

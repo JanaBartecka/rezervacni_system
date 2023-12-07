@@ -1,6 +1,7 @@
 <?php
 
     require "./classes/Lesson.php";
+    require "./classes/Characters.php";
     require './assets/globalVariables.php';
 
     $database = new Database();
@@ -23,11 +24,15 @@
 
     if ($currentPage >= 0) {
         $lekce = Lesson::getFutureLessonsPerPage($connection, $lessonsPerPage, $offset);
+        $filters = Lesson::getLessonsFiltered($connection, $lessonsPerPage, $offset);
     } else {
         $lekce = Lesson::getPastLessonsPerPage($connection, $lessonsPerPage, abs($offset));
     }
 
+
 ?>
+
+
 
         <section class='lessons'>
             <h1 class='lessons__headline'>Seznam lekcí</h1>
@@ -47,6 +52,19 @@
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=<?= $currentPage-1 ?>">Předchozí</a>
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=0">Nyní</a>
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=<?= $currentPage+1 ?>">Další</a>
+                </div>
+
+                <div class="lessons__filters">
+                    <form method='POST'>
+                        <?php foreach($filters as $filter): ?>
+                            <div class="lessons__filter">
+                                <?php $chboxName=Characters::removeDiacritics($filter['name_lekce']) ?>
+                                <label for="<?= $chboxName ?>"><?= $filter['name_lekce'] ?></label>
+                                <input type="checkbox" id="<?= $chboxName ?>">
+                            </div>
+                        <?php endforeach ?>
+                        <input type="submit" name='filter' value="Filtrovat">
+                    </form>
                 </div>
 
                 <ul class='lessons__list'>
