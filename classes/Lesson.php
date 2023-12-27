@@ -274,10 +274,10 @@ class Lesson {
      * @return array $lekce - array of objects where one object is one lesson
      * 
      */
-    public static function getFutureLessonsPerPage($connection, $lessonsPerPage, $offset) {
+    public static function getFutureLessonsPerPage($connection, $lessonsPerPage, $offset, $filteredItems) {
         $sql="SELECT * 
                 FROM lekce
-                WHERE day >= CURRENT_DATE() AND name_lekce='opakk'
+                WHERE day >= CURRENT_DATE() AND name_lekce IN $filteredItems
                 ORDER BY day ASC
                 LIMIT :lessonsPerPage
                 OFFSET :offset"; 
@@ -309,12 +309,11 @@ class Lesson {
      * @return array $lekce - array of objects where one object is one lesson
      * 
      */
-    public static function getPastLessonsPerPage($connection, $lessonsPerPage, $offset) {
+    public static function getPastLessonsPerPage($connection, $lessonsPerPage, $offset, $filteredItems) {
         $sql="WITH pastLessons AS (
                 SELECT * 
                 FROM lekce
-                WHERE day < CURRENT_DATE() AND name_lekce='opakk'
-                ORDER BY day DESC
+                WHERE day < CURRENT_DATE() AND name_lekce IN $filteredItems
                 LIMIT :lessonsPerPage
                 OFFSET :offset)
               SELECT * FROM pastLessons
@@ -347,7 +346,7 @@ class Lesson {
      * @return array $lekce - array of objects where one object is one lesson
      * 
      */
-    public static function getLessonsFiltered($connection, $lessonsPerPage, $offset) {
+    public static function getLessonsFilters($connection, $lessonsPerPage, $offset) {
         $sql="SELECT DISTINCT name_lekce
                 FROM lekce
                 ORDER BY day ASC
@@ -361,7 +360,7 @@ class Lesson {
 
         try {
             if ($stmt -> execute()) {
-                return $stmt -> fetchAll(PDO::FETCH_ASSOC);
+                return $stmt -> fetchAll(PDO::FETCH_COLUMN, 0);
             } else {
                 throw new Exception("chyba pri ziskani vsech lekci");
             }

@@ -22,20 +22,46 @@
         $currentPage = 0;
     } 
 
-    if ($currentPage >= 0) {
-        $lekce = Lesson::getFutureLessonsPerPage($connection, $lessonsPerPage, $offset);
-        $filters = Lesson::getLessonsFiltered($connection, $lessonsPerPage, $offset);
+    $filters = Lesson::getLessonsFilters($connection, $lessonsPerPage, $offset);
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['filter'])) {
+        if (!empty([$_POST['chbox']])) {
+            $filteredItems="('" . implode("','", $_POST['chbox']) . "')";
+            $filteredItemsArray=$_POST['chbox'];
+        } 
+        
     } else {
-        $lekce = Lesson::getPastLessonsPerPage($connection, $lessonsPerPage, abs($offset));
+        if(!empty($filters)){
+            $filteredItems="('" . implode("','", $filters) . "')";
+            $filteredItemsArray=[];
+        }
     }
 
+    if ($currentPage >= 0) {
+        $lekce = Lesson::getFutureLessonsPerPage($connection, $lessonsPerPage, $offset, $filteredItems);
+    } else {
+        $lekce = Lesson::getPastLessonsPerPage($connection, $lessonsPerPage, abs($offset), $filteredItems);
+    }
 
 ?>
 
-
-
         <section class='lessons'>
             <h1 class='lessons__headline'>Seznam lekcí</h1>
+
+            <!-- filters -->
+            <div >
+                <form class="lessons__filters" method='POST'>
+                    <?php foreach($filters as $filter): ?>
+                        <div class="lessons__filter">
+                            <?php $chboxName=Characters::removeDiacritics($filter) ?>
+                            <input type="checkbox" id="<?= $chboxName ?>" name="chbox[]" value="<?= $chboxName ?>" <?= (in_array($filter,$filteredItemsArray) ? 'checked' : '') ?>>
+                            <label for="<?= $chboxName ?>"><?= $filter ?></label>
+
+                        </div>
+                    <?php endforeach ?>
+                    <input type="submit" name='filter' value="Filtrovat">
+                </form>
+            </div>
             
             <?php if(empty($lekce)): ?>
                 <p class='error-line'>Nejsou vypsány žádné lekce</p>
@@ -48,23 +74,11 @@
                 </div>
             <?php else: ?>
 
+                <!-- pagination -->
                 <div class="lessons__pagination">
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=<?= $currentPage-1 ?>">Předchozí</a>
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=0">Nyní</a>
                     <a class='button-link' href="<?= $pathUrl?>/index.php?page=<?= $currentPage+1 ?>">Další</a>
-                </div>
-
-                <div class="lessons__filters">
-                    <form method='POST'>
-                        <?php foreach($filters as $filter): ?>
-                            <div class="lessons__filter">
-                                <?php $chboxName=Characters::removeDiacritics($filter['name_lekce']) ?>
-                                <label for="<?= $chboxName ?>"><?= $filter['name_lekce'] ?></label>
-                                <input type="checkbox" id="<?= $chboxName ?>">
-                            </div>
-                        <?php endforeach ?>
-                        <input type="submit" name='filter' value="Filtrovat">
-                    </form>
                 </div>
 
                 <ul class='lessons__list'>

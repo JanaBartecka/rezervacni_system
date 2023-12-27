@@ -103,6 +103,32 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    &__filters {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        flex-shrink: 0;
+
+        & input[type='submit'] {
+            align-self: center;
+            flex-basis: 100%;
+        }
+
+    }
+
+    &__filter {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+
+        & input[type='checkbox'] {
+            margin-right: 20px;
+        }
+
+    }
 }
 
 .lessons-item {

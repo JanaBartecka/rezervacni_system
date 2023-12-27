@@ -526,6 +526,26 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
+.lessons__filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-shrink: 0;
+}
+.lessons__filters input[type=submit] {
+  align-self: center;
+  flex-basis: 100%;
+}
+.lessons__filter {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lessons__filter input[type=checkbox] {
+  margin-right: 20px;
+}
 
 .lessons-item {
   display: flex;
