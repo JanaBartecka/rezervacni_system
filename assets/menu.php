@@ -7,6 +7,7 @@
         <ul class="menu__list menu__list--closed">
             <!-- general menu -->
             <li class="menu__item"><a class="menu__link" href="<?= $pathUrl ?>/">Úvod a seznam lekcí</a></li>
+            <li class="menu__item"><a class="menu__link" href="<?= $pathUrl ?>/kontakty.php">Kontakty</a></li>
             <!-- menu for admin -->
             <?php if ($role === 'admin') : ?>
                 <li class="menu__item"><a class="menu__link" href="<?= $pathUrl ?>/admin-lektor/lesson-add.php">Přidat lekci</a></li>

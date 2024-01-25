@@ -25,10 +25,13 @@
     $filters = Lesson::getLessonsFilters($connection, $lessonsPerPage, $offset);
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['filter'])) {
-        if (!empty([$_POST['chbox']])) {
+        if (isset($_POST['chbox']) AND !empty([$_POST['chbox']])) {
             $filteredItems="('" . implode("','", $_POST['chbox']) . "')";
             $filteredItemsArray=$_POST['chbox'];
-        } 
+        } else {
+            $filteredItems="('" . implode("','", $filters) . "')";
+            $filteredItemsArray=[];
+        }
         
     } else {
         if(!empty($filters)){
@@ -54,7 +57,7 @@
                     <?php foreach($filters as $filter): ?>
                         <div class="lessons__filter">
                             <?php $chboxName=Characters::removeDiacritics($filter) ?>
-                            <input type="checkbox" id="<?= $chboxName ?>" name="chbox[]" value="<?= $chboxName ?>" <?= (in_array($filter,$filteredItemsArray) ? 'checked' : '') ?>>
+                            <input type="checkbox" id="<?= $chboxName ?>" name="chbox[]" value="<?= $chboxName ?>" <?= (in_array($chboxName,$filteredItemsArray) ? 'checked' : '') ?>>
                             <label for="<?= $chboxName ?>"><?= $filter ?></label>
 
                         </div>
