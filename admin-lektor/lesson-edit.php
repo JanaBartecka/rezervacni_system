@@ -8,6 +8,7 @@
     require "../classes/Auth.php";
     require "../classes/Mail.php";
     require "../classes/Form.php";
+    require "../classes/Date.php";
     require '../assets/globalVariables.php';
 
     session_start();
@@ -61,7 +62,7 @@
         }
         
         $message = $_POST['message'];
-        $subject = 'Probehla zmena v lekci ' . $name_lekce . ' konane dne ' . $day . ' od ' . $time_start . '.';
+        $subject = 'Proběhla změna v lekci ' . $name_lekce . ' konané dne ' . Date::DateFromDBdate($lekce['day']) . ' od ' . Date::DateFromDBtimeStart($lekce['time_start']) . '.';
 
         if(Lesson::UpdateLesson($connection, $name_lekce, $day, $time_start, $time_end, $time_apply_to, $max_to_apply, $id_lekce)) {
 

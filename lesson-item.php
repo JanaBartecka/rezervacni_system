@@ -158,9 +158,9 @@
                 <!-- information about user´s reservation to this specific lesson if user IS APPLIED-->
                 <?php if ($userLoggedIn) : ?>
                     <?php if ($number_of_applications ===0) : ?>
-                        <p>Na tuto lekci nemáte rezervaci</p>
+                        <p>Na tuto lekci <b>nemáte rezervaci</b></p>
                     <?php else: ?>
-                        <p>Na tuto lekci máte <?= $number_of_applications ?> přihlášení</p>
+                        <p>Na tuto lekci máte <b> <?= $number_of_applications ?> přihlášení </b></p>
                         <!-- delete reservation to lesson -->
                         <?php if (Date::DateFromDBlessonStart($lekce['day'], $lekce['time_start']) > Date:: DateFromDBapplyTo($lekce['day'], $lekce['time_start'], $lekce['time_apply_to'])) : ?>
                             <form method="POST">

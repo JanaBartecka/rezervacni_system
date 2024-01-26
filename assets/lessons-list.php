@@ -22,7 +22,7 @@
         $currentPage = 0;
     } 
 
-    $filters = Lesson::getLessonsFilters($connection, $lessonsPerPage, $offset);
+    $filters = Lesson::getLessonsFilters($connection, $lessonsPerPage, abs($offset));
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" AND isset($_POST['filter'])) {
         if (isset($_POST['chbox']) AND !empty([$_POST['chbox']])) {
@@ -37,13 +37,17 @@
         if(!empty($filters)){
             $filteredItems="('" . implode("','", $filters) . "')";
             $filteredItemsArray=[];
+        } else {
+            $filteredItems=[];
         }
     }
 
-    if ($currentPage >= 0) {
+    if ($currentPage >= 0 AND !empty($filteredItems)) {
         $lekce = Lesson::getFutureLessonsPerPage($connection, $lessonsPerPage, $offset, $filteredItems);
-    } else {
+    } else if ($currentPage < 0 AND !empty($filteredItems)) {
         $lekce = Lesson::getPastLessonsPerPage($connection, $lessonsPerPage, abs($offset), $filteredItems);
+    } else if (empty($filteredItems)) {
+        $lekce=[];
     }
 
 ?>
@@ -62,7 +66,9 @@
 
                         </div>
                     <?php endforeach ?>
-                    <input type="submit" name='filter' value="Filtrovat">
+                    <?php if(!empty($filters)) : ?>
+                        <input type="submit" name='filter' value="Filtrovat">
+                    <?php endif ?>
                 </form>
             </div>
             
@@ -91,7 +97,7 @@
                         $timeStart = new DateTime($one_lekce["time_start"]);
                         $timeStartFormat = $timeStart->format('H:i');
                         $timeEnd = new DateTime($one_lekce["time_end"]);
-                        $timeEndFormat = $timeStart->format('H:i');
+                        $timeEndFormat = $timeEnd->format('H:i');
 
                         $lessonStart = new DateTime( $one_lekce['day'] . $one_lekce['time_start']);
                         $nowMinusTimeToApply = new DateTime('now');

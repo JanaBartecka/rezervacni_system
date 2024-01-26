@@ -27,9 +27,12 @@
                 <input type="password" name="password" placeholder="Heslo" required>
                 <input type="password" name="password_check" placeholder="Heslo znovu" required>
                 <p class='registration-form__passwordConfirm'></p>
+                <p>Registrací souhlasím s <a href="<?= $pathUrl?> /downloads/GDPR.odt">podmínkami pro uchovávání osobních dat</a>.</p>
+        <p>Heslo prosím volte unikátní, nepoužívejte stejná hesla pro přihlášení do různých systémů.</p>
                 <input class='registration-form__submit' type="submit" value="Zaregistrovat">
             </form>
         </section>
+
     </main>
 
     <footer>

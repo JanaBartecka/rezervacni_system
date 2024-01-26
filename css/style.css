@@ -34,6 +34,9 @@ p {
   line-height: 1.5;
   text-align: left;
 }
+p__line2 {
+  line-height: 2;
+}
 
 h1, h2, h3 {
   margin: 0;

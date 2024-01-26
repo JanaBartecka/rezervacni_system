@@ -54,7 +54,7 @@
 
         <div class="list__bottons--single">
             <!-- add user to apply -->
-            <?php if($free_to_apply >= 0): ?>
+            <?php if($free_to_apply > 0): ?>
                 <a class='button-link' href="<?= $pathUrl ?>/admin-lektor/users-all.php?userToApply=1&id_lekce=<?= $_GET['id_lekce']?>" > Přiřadit registrovaného uživatele</a>
             <?php else: ?>
                 <p class='error-line'>Kapacita naplněna</p>

@@ -38,7 +38,7 @@
             if (isset($_POST['deleteReservation'])) {
                 
                 $message = $_POST['messageLessonDeleted'];
-                $subject = $lekce['name_lekce'] . 'v' . $lekce['day'] . 'zrusen';
+                $subject = 'Lekce ' . $lekce['name_lekce'] . ' dne ' . Date::DateFromDBdate($lekce['day']) . ' zrušena.';
                 
                 if($mailList) {
                     Mail::sendMail($mailList, $subject, $message);
